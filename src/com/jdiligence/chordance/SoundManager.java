@@ -38,6 +38,15 @@ public class SoundManager {
 		}
 	}
 
+	// A chord is an array of intervals
+	public void playChord(int[] chord) {
+		// chords sound terrible unless we stop other notes first
+		mSoundPool.autoPause();
+		for (int i = 0; i < chord.length; i++)
+			playNote(chord[i]);
+	}
+	
+	// All notes are intervals upwards from C3
 	public void playNote(int interval) {
 		if (interval >= rids.length)
 			interval = interval % 12; // prevent playing notes we don't have

@@ -38,9 +38,8 @@ public class ButtonAdapter extends BaseAdapter {
 			@Override
 			public void onClick(View v) {
 				// Simple 3 part harmony
-				mSoundManager.playNote(intervals[position]);
-				mSoundManager.playNote(intervals[(position + 2) % 7]);
-				mSoundManager.playNote(intervals[(position + 4) % 7]);
+				int[] chord = new int[] { intervals[position], intervals[(position + 2) % 7], intervals[(position + 4) % 7] };
+				mSoundManager.playChord(chord);
 			}
 		});
 		
