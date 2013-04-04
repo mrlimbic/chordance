@@ -37,8 +37,10 @@ public class ButtonAdapter extends BaseAdapter {
 		tb.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				//TODO Make this chords
+				// Simple 3 part harmony
 				mSoundManager.playNote(intervals[position]);
+				mSoundManager.playNote(intervals[(position + 2) % 7]);
+				mSoundManager.playNote(intervals[(position + 4) % 7]);
 			}
 		});
 		

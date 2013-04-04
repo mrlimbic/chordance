@@ -18,7 +18,6 @@ public class SoundManager {
 		};
 	
 	private int[] sids;
-	//	private boolean[] loaded;
 
 	public void initSounds(Context theContext) {
 		mContext = theContext;
@@ -28,10 +27,8 @@ public class SoundManager {
 		
 		// load
 		sids = new int[rids.length];
-//		loaded = new boolean[rids.length];
 		mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
 		    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-//		       loaded[j] = true;
 		       Log.i("load", "load " + sampleId + ":" + status);
 		    }
 		});
@@ -42,9 +39,10 @@ public class SoundManager {
 	}
 
 	public void playNote(int interval) {
-//		if (loaded[interval]) {
-			int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); 
-	        int streamId = mSoundPool.play(sids[interval], streamVolume, streamVolume, 1, 0, 1f);			
-//		}
+		if (interval >= rids.length)
+			interval = interval % 12; // prevent playing notes we don't have
+		
+		int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC); 
+	    int streamId = mSoundPool.play(sids[interval], streamVolume, streamVolume, 1, 0, 1f);			
 	}
 }
