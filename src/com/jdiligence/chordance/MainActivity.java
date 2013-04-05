@@ -21,9 +21,12 @@ public class MainActivity extends Activity {
 		mSoundManager = new SoundManager();
 		mSoundManager.initSounds(getBaseContext());
 
-		GridView grid = (GridView) this.findViewById(R.id.chords);
-		grid.setAdapter(new ButtonAdapter(this, mSoundManager));
-		
+		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
+		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
+
+		GridView inversionGrid = (GridView) this.findViewById(R.id.inversions);
+		inversionGrid.setAdapter(new InversionAdapter(this, mSoundManager));
+
 	}
 
 	@Override

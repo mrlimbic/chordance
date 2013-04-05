@@ -8,13 +8,13 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 
-public class ButtonAdapter extends BaseAdapter {
+public class InversionAdapter extends BaseAdapter {
 	private Context mContext;
-	private String[] buttons = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" };
+	private String[] buttons = { "1st", "2nd", "3rd", "4th" };
 	private SoundManager mSoundManager;
 	private int[] intervals = {0, 2, 4, 5, 7, 9, 11, 12};
 
-	public ButtonAdapter(Context c, SoundManager s) {
+	public InversionAdapter(Context c, SoundManager s) {
 		mContext = c;
 		mSoundManager = s;
 	}
@@ -43,7 +43,6 @@ public class ButtonAdapter extends BaseAdapter {
 			}
 		});
 		
-		
 		return tb;
 	}
 
@@ -58,4 +57,5 @@ public class ButtonAdapter extends BaseAdapter {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
 }
