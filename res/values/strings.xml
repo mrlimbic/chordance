@@ -4,4 +4,42 @@
     <string name="app_name">Chordance</string>
     <string name="action_settings">Settings</string>
 
+    <string-array name="keys">
+        <item>C</item>
+        <item>C#/Db</item>
+        <item>D</item>
+        <item>D#/Eb</item>
+        <item>E</item>
+        <item>F</item>
+        <item>F#/Gb</item>
+        <item>G</item>
+        <item>G#/Ab</item>
+        <item>A</item>
+        <item>A#/Bb</item>
+        <item>B</item>
+    </string-array>
+
+    <string-array name="scales">
+        <item>Major</item>
+        <item>Natural Minor</item>
+        <item>Melodic Minor</item>
+        <item>Harmonic Minor</item>
+    </string-array>
+
+    <string-array name="modes">
+        <item>Ionian</item>
+        <item>Dorian</item>
+        <item>Phrygian</item>
+        <item>Lydian</item>
+        <item>Mixylodian</item>
+        <item>Aeolian</item>
+        <item>Locrian</item>
+    </string-array>
+  
+    <string-array name="inversions">
+        <item>1st</item>
+        <item>2nd</item>
+        <item>3rd</item>
+     </string-array>
+    
 </resources>

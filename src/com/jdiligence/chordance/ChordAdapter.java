@@ -10,9 +10,8 @@ import android.widget.GridView;
 
 public class ChordAdapter extends BaseAdapter {
 	private Context mContext;
-	private String[] buttons = { "I", "II", "III", "IV", "V", "VI", "VII", "VIII" };
+	private String[] buttons = { "I", "II", "III", "IV", "V", "VI", "VII" };
 	private SoundManager mSoundManager;
-	private int[] intervals = {0, 2, 4, 5, 7, 9, 11, 12};
 
 	public ChordAdapter(Context c, SoundManager s) {
 		mContext = c;
@@ -37,12 +36,9 @@ public class ChordAdapter extends BaseAdapter {
 		tb.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// Simple 3 part harmony
-				int[] chord = new int[] { intervals[position], intervals[(position + 2) % 7], intervals[(position + 4) % 7] };
-				mSoundManager.playChord(chord);
+				mSoundManager.playChord(position);
 			}
 		});
-		
 		
 		return tb;
 	}
