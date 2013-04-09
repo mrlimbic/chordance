@@ -1,6 +1,7 @@
 package com.jdiligence.chordance;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -11,6 +12,14 @@ import android.widget.GridView;
 import android.widget.Spinner;
 
 public class MainActivity extends Activity {
+	
+	private static final String KEY = "key";
+	private static final String SCALE = "scale";
+	private static final String MODE = "mode";
+	private static final String TONES = "tones";
+	private static final String INVERSION = "inversion";
+	
+	private SharedPreferences prefs;
 	
 	private SoundManager mSoundManager;
 
@@ -86,7 +95,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				mSoundManager.setTone(tones.getSelectedItemPosition());
+				mSoundManager.setTones(tones.getSelectedItemPosition());
 			}
 
 			@Override
@@ -110,22 +119,10 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
 		
-//		if (savedInstanceState != null) {
-//			key.setSelection(savedInstanceState.getInt("key"));
-//			scale.setSelection(savedInstanceState.getInt("scale"));
-//			mode.setSelection(savedInstanceState.getInt("mode"));
-//			tones.setSelection(savedInstanceState.getInt("tones"));
-//			inversion.setSelection(savedInstanceState.getInt("inversion"));			
-//		} else {
-//			key.setSelection(0);
-//			scale.setSelection(0);
-//			mode.setSelection(0);
-//			tones.setSelection(0);
-//			inversion.setSelection(0);
-//		}
-
 		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
 		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
+		
+		prefs = getPreferences(Activity.MODE_PRIVATE);
 	}
 
 	@Override
@@ -136,39 +133,28 @@ public class MainActivity extends Activity {
 	}
 
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		
-		outState.putInt("key", key.getSelectedItemPosition());
-		outState.putInt("scale", scale.getSelectedItemPosition());
-		outState.putInt("mode", mode.getSelectedItemPosition());
-		outState.putInt("tones", tones.getSelectedItemPosition());
-		outState.putInt("inversion", inversion.getSelectedItemPosition());
-	}
-	
-	@Override
-	protected void onRestoreInstanceState(Bundle savedInstanceState) {
-		super.onRestoreInstanceState(savedInstanceState);
-		
-		key.setSelection(savedInstanceState.getInt("key"));
-		scale.setSelection(savedInstanceState.getInt("scale"));
-		mode.setSelection(savedInstanceState.getInt("mode"));
-		tones.setSelection(savedInstanceState.getInt("tones"));
-		inversion.setSelection(savedInstanceState.getInt("inversion"));			
-	}
-
-	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 		
+		SharedPreferences.Editor editor = prefs.edit();
+		editor.putInt(KEY, key.getSelectedItemPosition());
+		editor.putInt(SCALE, scale.getSelectedItemPosition());
+		editor.putInt(MODE, mode.getSelectedItemPosition());
+		editor.putInt(TONES, tones.getSelectedItemPosition());
+		editor.putInt(INVERSION, inversion.getSelectedItemPosition());
 		
+		editor.commit();
 	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+
+		key.setSelection(prefs.getInt(KEY, 0));
+		scale.setSelection(prefs.getInt(SCALE, 0));
+		mode.setSelection(prefs.getInt(MODE, 0));
+		tones.setSelection(prefs.getInt(TONES, 0));
+		inversion.setSelection(prefs.getInt(INVERSION, 0));		
 	}
-	
 }

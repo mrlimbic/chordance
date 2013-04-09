@@ -10,12 +10,7 @@ public class SoundManager {
 	private AudioManager mAudioManager;
 	private Context mContext;
 	
-	final private int[] MAJOR = {0, 2, 4, 5, 7, 9, 11};
-	final private int[] NATURAL_MINOR = {0, 2, 3, 5, 7, 8, 10};
-	final private int[] MELODIC_MINOR = {0, 2, 3, 5, 7, 9, 11};
-	final private int[] HARMONIC_MINOR = {0, 2, 3, 5, 7, 8, 11};
-	
-	final private int[][] SCALES = { MAJOR, NATURAL_MINOR, MELODIC_MINOR, HARMONIC_MINOR };
+	final private int[][] SCALES = {{0, 2, 4, 5, 7, 9, 11}, {0, 2, 3, 5, 7, 8, 10}, {0, 2, 3, 5, 7, 9, 11}, {0, 2, 3, 5, 7, 8, 11}};
 	final private int[][] TONES = {{0, 2, 4}, {0, 2, 5}, {0, 2, 6}, {0, 2, 4, 6}, {0, 1, 4}, {0, 3, 4}};
 	
 	private int[] rids = new int[] { 
@@ -29,33 +24,30 @@ public class SoundManager {
 	private int key;
 	private int scale;
 	private int mode;
-	private int tone;
+	private int tones;
 	private int inversion;
 
 	public void initSounds(Context theContext) {
 		mContext = theContext;
-		mSoundPool = new SoundPool(7, AudioManager.STREAM_MUSIC, 0);
+		mSoundPool = new SoundPool(4, AudioManager.STREAM_MUSIC, 0);
 		mAudioManager = (AudioManager) mContext
 				.getSystemService(Context.AUDIO_SERVICE);
-		
-		// load
-		sids = new int[rids.length];
 //		mSoundPool.setOnLoadCompleteListener(new OnLoadCompleteListener() {
-//		    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-//		       Log.i("load", "load " + sampleId + ":" + status);
-//		    }
-//		});
-		
+//	    public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+//	       Log.i("load", "load " + sampleId + ":" + status);
+//	    }
+//	});
+		sids = new int[rids.length];
 		for (int i = 0; i < rids.length; i++) {
 			sids[i] = mSoundPool.load(mContext, rids[i], 1);
 		}
 	}
 
 	public void playChord(int position) {
-		int[] tones = TONES[tone];
-		int[] chord = new int[tones.length];
+		int[] intervals = TONES[tones];
+		int[] chord = new int[intervals.length];
 		for (int i = 0; i < chord.length; i++) {
-			int toff = tones[i] + position + mode;
+			int toff = intervals[i] + position + mode;
 			int interval = SCALES[scale][toff % 7] + (12 * (toff / 7));
 			chord[i] = interval + key + (i < inversion ? 12 : 0);
 		}
@@ -133,12 +125,12 @@ public class SoundManager {
 		this.key = key;
 	}
 
-	public int getTone() {
-		return tone;
+	public int getTones() {
+		return tones;
 	}
 
-	public void setTone(int tone) {
-		this.tone = tone;
+	public void setTones(int tones) {
+		this.tones = tones;
 	}
 	
 }
