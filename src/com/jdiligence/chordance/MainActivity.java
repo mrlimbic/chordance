@@ -17,6 +17,7 @@ public class MainActivity extends Activity {
 	private Spinner key;
 	private Spinner scale;
 	private Spinner mode;
+	private Spinner tones;
 	private Spinner inversion;	
 	
 	@Override
@@ -79,9 +80,23 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
 
-		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
-		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
-		
+		tones = (Spinner)this.findViewById(R.id.tones);
+		ArrayAdapter<CharSequence> adapter5 = ArrayAdapter.createFromResource(this,
+		        R.array.tones, android.R.layout.simple_spinner_item);
+		adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		tones.setAdapter(adapter5);
+		tones.setSelection(0);
+		tones.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view,
+					int position, long id) {
+				mSoundManager.setTone(tones.getSelectedItemPosition());
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent) {
+			}});
+
 		inversion = (Spinner)this.findViewById(R.id.inversion);
 		ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
 		        R.array.inversions, android.R.layout.simple_spinner_item);
@@ -98,6 +113,9 @@ public class MainActivity extends Activity {
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
+		
+		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
+		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
 	}
 
 	@Override

@@ -36,6 +36,15 @@
         <item>Locrian</item>
     </string-array>
   
+    <string-array name="tones">
+        <item>1st,3rd,5th</item>
+        <item>1st,3rd,6th</item>
+        <item>1st,3rd,7th</item>
+        <item>1st,3rd,5th,7th</item>
+        <item>1st,2nd,5th</item>
+        <item>1st,4th,5th</item>
+    </string-array>
+    
     <string-array name="inversions">
         <item>1st</item>
         <item>2nd</item>

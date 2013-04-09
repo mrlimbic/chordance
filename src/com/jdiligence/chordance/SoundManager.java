@@ -3,8 +3,6 @@ package com.jdiligence.chordance;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
-import android.media.SoundPool.OnLoadCompleteListener;
-import android.util.Log;
 
 public class SoundManager {
 
@@ -13,11 +11,12 @@ public class SoundManager {
 	private Context mContext;
 	
 	final private int[] MAJOR = {0, 2, 4, 5, 7, 9, 11};
-	final private int[] NATURAL_MINOR = {0, 2, 3, 5, 7, 9, 10};
+	final private int[] NATURAL_MINOR = {0, 2, 3, 5, 7, 8, 10};
 	final private int[] MELODIC_MINOR = {0, 2, 3, 5, 7, 9, 11};
 	final private int[] HARMONIC_MINOR = {0, 2, 3, 5, 7, 8, 11};
 	
 	final private int[][] SCALES = { MAJOR, NATURAL_MINOR, MELODIC_MINOR, HARMONIC_MINOR };
+	final private int[][] TONES = {{0, 2, 4}, {0, 2, 5}, {0, 2, 6}, {0, 2, 4, 6}, {0, 1, 4}, {0, 3, 4}};
 	
 	private int[] rids = new int[] { 
 			R.raw.c3, R.raw.d3b, R.raw.d3, R.raw.e3b, R.raw.e3, R.raw.f3, R.raw.g3b, R.raw.g3, R.raw.a3b, R.raw.a3, R.raw.b3b, R.raw.b3,
@@ -30,11 +29,12 @@ public class SoundManager {
 	private int key;
 	private int scale;
 	private int mode;
+	private int tone;
 	private int inversion;
 
 	public void initSounds(Context theContext) {
 		mContext = theContext;
-		mSoundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+		mSoundPool = new SoundPool(7, AudioManager.STREAM_MUSIC, 0);
 		mAudioManager = (AudioManager) mContext
 				.getSystemService(Context.AUDIO_SERVICE);
 		
@@ -52,12 +52,12 @@ public class SoundManager {
 	}
 
 	public void playChord(int position) {
-		position += mode;
-		int[] chord = new int[3];
+		int[] tones = TONES[tone];
+		int[] chord = new int[tones.length];
 		for (int i = 0; i < chord.length; i++) {
-			int interval = SCALES[scale][position % 7] + (12 * (position / 7));
+			int toff = tones[i] + position + mode;
+			int interval = SCALES[scale][toff % 7] + (12 * (toff / 7));
 			chord[i] = interval + key + (i < inversion ? 12 : 0);
-			position += 2;
 		}
 
 		playChord(chord);
@@ -132,4 +132,13 @@ public class SoundManager {
 	public void setKey(int key) {
 		this.key = key;
 	}
+
+	public int getTone() {
+		return tone;
+	}
+
+	public void setTone(int tone) {
+		this.tone = tone;
+	}
+	
 }
