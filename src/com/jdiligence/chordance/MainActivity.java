@@ -34,7 +34,6 @@ public class MainActivity extends Activity {
 		        R.array.keys, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		key.setAdapter(adapter);
-		key.setSelection(0);
 		key.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -45,13 +44,12 @@ public class MainActivity extends Activity {
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
-		
+				
 		scale = (Spinner)this.findViewById(R.id.scale);
 		ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this,
 		        R.array.scales, android.R.layout.simple_spinner_item);
 		adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		scale.setAdapter(adapter2);
-		scale.setSelection(0);
 		scale.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -62,13 +60,12 @@ public class MainActivity extends Activity {
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
-		
+
 		mode = (Spinner)this.findViewById(R.id.mode);
 		ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this,
 		        R.array.modes, android.R.layout.simple_spinner_item);
 		adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		mode.setAdapter(adapter3);
-		mode.setSelection(0);
 		mode.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -85,7 +82,6 @@ public class MainActivity extends Activity {
 		        R.array.tones, android.R.layout.simple_spinner_item);
 		adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		tones.setAdapter(adapter5);
-		tones.setSelection(0);
 		tones.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -97,12 +93,12 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
 
+
 		inversion = (Spinner)this.findViewById(R.id.inversion);
 		ArrayAdapter<CharSequence> adapter4 = ArrayAdapter.createFromResource(this,
 		        R.array.inversions, android.R.layout.simple_spinner_item);
 		adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		inversion.setAdapter(adapter4);
-		inversion.setSelection(0);
 		inversion.setOnItemSelectedListener(new OnItemSelectedListener() {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
@@ -114,6 +110,20 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
 		
+//		if (savedInstanceState != null) {
+//			key.setSelection(savedInstanceState.getInt("key"));
+//			scale.setSelection(savedInstanceState.getInt("scale"));
+//			mode.setSelection(savedInstanceState.getInt("mode"));
+//			tones.setSelection(savedInstanceState.getInt("tones"));
+//			inversion.setSelection(savedInstanceState.getInt("inversion"));			
+//		} else {
+//			key.setSelection(0);
+//			scale.setSelection(0);
+//			mode.setSelection(0);
+//			tones.setSelection(0);
+//			inversion.setSelection(0);
+//		}
+
 		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
 		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
 	}
@@ -125,4 +135,40 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		
+		outState.putInt("key", key.getSelectedItemPosition());
+		outState.putInt("scale", scale.getSelectedItemPosition());
+		outState.putInt("mode", mode.getSelectedItemPosition());
+		outState.putInt("tones", tones.getSelectedItemPosition());
+		outState.putInt("inversion", inversion.getSelectedItemPosition());
+	}
+	
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		
+		key.setSelection(savedInstanceState.getInt("key"));
+		scale.setSelection(savedInstanceState.getInt("scale"));
+		mode.setSelection(savedInstanceState.getInt("mode"));
+		tones.setSelection(savedInstanceState.getInt("tones"));
+		inversion.setSelection(savedInstanceState.getInt("inversion"));			
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		
+		
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+	}
+	
 }
