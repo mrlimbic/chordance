@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    
+    <Button
+        android:id="@+id/chord1"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textInversion"
+        android:layout_toRightOf="@id/textInversion"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/chord2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chord1"
+        android:layout_toRightOf="@id/chord1"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/chord3"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chord1"
+        android:layout_toRightOf="@id/chord2"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/chord4"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chord1"
+        android:layout_toRightOf="@id/chord3"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/chord5"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chord4"
+        android:layout_toRightOf="@id/chord4"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/chord6"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chord5"
+        android:layout_toRightOf="@id/chord5"
+        android:text="Button" />
+
+    <Button
+        android:id="@+id/chord7"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/chord6"
+        android:layout_toRightOf="@id/chord6"
+        android:text="Button" />
+    
+
+</RelativeLayout>

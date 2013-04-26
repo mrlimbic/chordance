@@ -86,67 +86,12 @@
         android:layout_alignTop="@id/textInversion"
         android:layout_toRightOf="@id/textInversion" />
 
-    <Button
-        android:id="@+id/chord1"
-        style="?android:attr/buttonStyleSmall"
+    <fragment
+        android:id="@+id/chordplay_fragment"
+        android:name="com.jdiligence.chordance.ChordPlayFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textInversion"
-        android:layout_toRightOf="@id/textInversion"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/chord2"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/chord1"
-        android:layout_toRightOf="@id/chord1"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/chord3"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/chord1"
-        android:layout_toRightOf="@id/chord2"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/chord4"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/chord1"
-        android:layout_toRightOf="@id/chord3"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/chord5"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/chord1"
-        android:layout_below="@id/chord1"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/chord6"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/chord2"
-        android:layout_toRightOf="@id/chord5"
-        android:text="Button" />
-
-    <Button
-        android:id="@+id/chord7"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/chord3"
-        android:layout_below="@id/chord3"
-        android:text="Button" />
+        android:layout_alignLeft="@id/inversion"
+        android:layout_below="@id/inversion" />
 
 </RelativeLayout>

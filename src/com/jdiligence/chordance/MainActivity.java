@@ -5,12 +5,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.GridView;
 import android.widget.Spinner;
 
 public class MainActivity extends Activity {
@@ -23,14 +20,14 @@ public class MainActivity extends Activity {
 	
 	private SharedPreferences prefs;
 	
-	private SoundManager mSoundManager;
+	private SoundManager soundManager;
 
 	private Spinner key;
 	private Spinner scale;
 	private Spinner mode;
 	private Spinner tones;
 	private Spinner inversion;
-	private Button[] buttons;
+	private ChordPlayFragment chordplay_fragment;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +35,8 @@ public class MainActivity extends Activity {
 		
 		setContentView(R.layout.activity_main);
 
-		mSoundManager = new SoundManager();
-		mSoundManager.initSounds(getBaseContext());
+		soundManager = new SoundManager();
+		soundManager.initSounds(getBaseContext());
 		
 		key = (Spinner)this.findViewById(R.id.key);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -50,7 +47,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				mSoundManager.setKey(key.getSelectedItemPosition());
+				soundManager.setKey(key.getSelectedItemPosition());
 			}
 
 			@Override
@@ -66,7 +63,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				mSoundManager.setScale(scale.getSelectedItemPosition());
+				soundManager.setScale(scale.getSelectedItemPosition());
 			}
 
 			@Override
@@ -82,7 +79,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				mSoundManager.setMode(mode.getSelectedItemPosition());
+				soundManager.setMode(mode.getSelectedItemPosition());
 			}
 
 			@Override
@@ -98,7 +95,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				mSoundManager.setTones(tones.getSelectedItemPosition());
+				soundManager.setTones(tones.getSelectedItemPosition());
 			}
 
 			@Override
@@ -115,42 +112,19 @@ public class MainActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view,
 					int position, long id) {
-				mSoundManager.setInversion(inversion.getSelectedItemPosition());
+				soundManager.setInversion(inversion.getSelectedItemPosition());
 			}
 
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
 		
-		buttons = new Button[] {
-				(Button)this.findViewById(R.id.chord1), (Button)this.findViewById(R.id.chord2), (Button)this.findViewById(R.id.chord3), (Button)this.findViewById(R.id.chord4),
-				(Button)this.findViewById(R.id.chord5), (Button)this.findViewById(R.id.chord6), (Button)this.findViewById(R.id.chord7)};
-		
-		String[] chords = getResources().getStringArray(R.array.chords);
-		for (int i = 0; i < buttons.length; i++) {
-			buttons[i].setText(chords[i]);
-			buttons[i].setOnClickListener(new ChordListener(i));
-		}
-		
-//		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
-//		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
+		chordplay_fragment = (ChordPlayFragment)getFragmentManager().findFragmentById(R.id.chordplay_fragment);
+		chordplay_fragment.setSoundManager(soundManager);
 		
 		prefs = getPreferences(Activity.MODE_PRIVATE);
 	}
 	
-	class ChordListener implements OnClickListener {
-		int chord;
-		
-		ChordListener(int chord) {
-			this.chord = chord;
-		}
-		
-		@Override
-		public void onClick(View v) {
-			mSoundManager.playChord(chord);
-		}
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
