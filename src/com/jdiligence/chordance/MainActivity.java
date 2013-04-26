@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+
 public class MainActivity extends Activity {
 	
 	private static final String KEY = "key";
