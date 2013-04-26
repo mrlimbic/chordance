@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Spinner;
 
@@ -27,7 +29,8 @@ public class MainActivity extends Activity {
 	private Spinner scale;
 	private Spinner mode;
 	private Spinner tones;
-	private Spinner inversion;	
+	private Spinner inversion;
+	private Button[] buttons;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -119,10 +122,33 @@ public class MainActivity extends Activity {
 			public void onNothingSelected(AdapterView<?> parent) {
 			}});
 		
-		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
-		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
+		buttons = new Button[] {
+				(Button)this.findViewById(R.id.chord1), (Button)this.findViewById(R.id.chord2), (Button)this.findViewById(R.id.chord3), (Button)this.findViewById(R.id.chord4),
+				(Button)this.findViewById(R.id.chord5), (Button)this.findViewById(R.id.chord6), (Button)this.findViewById(R.id.chord7)};
+		
+		String[] chords = getResources().getStringArray(R.array.chords);
+		for (int i = 0; i < buttons.length; i++) {
+			buttons[i].setText(chords[i]);
+			buttons[i].setOnClickListener(new ChordListener(i));
+		}
+		
+//		GridView chordGrid = (GridView) this.findViewById(R.id.chords);
+//		chordGrid.setAdapter(new ChordAdapter(this, mSoundManager));
 		
 		prefs = getPreferences(Activity.MODE_PRIVATE);
+	}
+	
+	class ChordListener implements OnClickListener {
+		int chord;
+		
+		ChordListener(int chord) {
+			this.chord = chord;
+		}
+		
+		@Override
+		public void onClick(View v) {
+			mSoundManager.playChord(chord);
+		}
 	}
 
 	@Override

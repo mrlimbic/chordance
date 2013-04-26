@@ -10,7 +10,7 @@ public class SoundManager {
 	private AudioManager mAudioManager;
 	private Context mContext;
 	
-	final private int[][] SCALES = {{0, 2, 4, 5, 7, 9, 11}, {0, 2, 3, 5, 7, 8, 10}, {0, 2, 3, 5, 7, 9, 11}, {0, 2, 3, 5, 7, 8, 11}};
+	final private int[][] SCALES = {{0, 2, 4, 5, 7, 9, 11}, {0, 2, 4, 5, 7, 9, 10}, {0, 2, 3, 5, 7, 8, 10}, {0, 2, 3, 5, 7, 9, 11}, {0, 2, 3, 5, 7, 8, 11}};
 	final private int[][] TONES = {{0, 2, 4}, {0, 2, 5}, {0, 2, 6}, {0, 2, 4, 6}, {0, 1, 4}, {0, 3, 4}};
 	
 	private int[] rids = new int[] { 

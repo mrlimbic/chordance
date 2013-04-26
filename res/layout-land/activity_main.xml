@@ -127,8 +127,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/chord1"
-        android:layout_below="@id/chord1"
+        android:layout_alignTop="@id/chord4"
+        android:layout_toRightOf="@id/chord4"
         android:text="Button" />
 
     <Button
@@ -136,7 +136,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/chord2"
+        android:layout_alignTop="@id/chord5"
         android:layout_toRightOf="@id/chord5"
         android:text="Button" />
 
@@ -145,8 +145,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/chord3"
-        android:layout_below="@id/chord3"
+        android:layout_alignTop="@id/chord6"
+        android:layout_toRightOf="@id/chord6"
         android:text="Button" />
 
 </RelativeLayout>
